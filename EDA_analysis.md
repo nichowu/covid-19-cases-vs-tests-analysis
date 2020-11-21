@@ -34,15 +34,25 @@ Response Ratio = \# of daily new tests / \# of daily new cases
 Below we have shown the number of observations, mean, median and
 standard deviation of response ratio (Table 1).
 
-We can see from the table that the mean response ratio for Canada is
-higher than the median, so its distribution seems to be right skewed.
 The mean and median ratio for the USA are close to each other, which
-suggests that the ratio for the USA is normally distributed.
+suggests that the ratio for the USA is normally distributed. The mean
+response ratio for Canada is higher than the median, so its distribution
+seems to be right skewed. This suggests that the true population of
+response ratio may not be normally distributed. However, since the
+sample size is well above 30, the large enough sample size assumption
+under the Central Limit Theorem is met. Therefore the sample observation
+does not need to come from a normally distributed population. Because
+all conditions of Central Limit Theorem have been met, we decided that
+it is safe to use mean response ratio as test statistic for our
+hypothesis test.
 
 The standard deviation of Canada is quite large, compared with the mean
 and median ratio. It indicates that the response ratio in Canada is more
 widely spread out. The standard deviation of the USA is a lot smaller,
-which suggests that more of the ratio is clustered around the mean.
+which suggests that more of the ratio is clustered around the mean. It
+should be noted that the standard deviation might have been affected by
+data in the early stage of the pandemic, as tests were not fully
+developed and new cases were only detected within a few communities.
 
 ``` r
 covid_all_country <-  read_csv("data/owid-covid-data.csv", guess_max = 5000)
