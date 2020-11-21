@@ -8,15 +8,13 @@ maintained by [Our World in
 Data](https://ourworldindata.org/coronavirus). It is updated daily and
 includes data on confirmed cases, deaths, hospitalizations and testing,
 as well as other variable of potential interests. This data has been
-collected, aggregated, and documented by Cameron Appel, Diana Beltekian,
-Daniel Gavrilov, Charlie Giattino, Joe Hasell, Bobbie Macdonald, Edouard
-Mathieu, Esteban Ortiz-Ospina, Hannah Ritchie, Max Roser. It was sourced
-from various origin. Confirmed cases, deaths, hospitalizations and other
-related information are sourced from the European Centre for Disease
-Prevention and Control (ECDC). Testing related information are collected
-by the Our World in Data team from offical reports. Other sources
-include United Nations, World Bank, Global Burden of Disease. More
-information can be found
+collected, aggregated, and documented by Cameron Appel et al. Various
+origins have been sourced. Confirmed cases, deaths, hospitalizations and
+other related information are sourced from the European Centre for
+Disease Prevention and Control (ECDC). Testing related information are
+collected by the Our World in Data team from offical reports. Other
+sources include United Nations, World Bank and Global Burden of Disease.
+More information can be found
 [here](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
 
 ## EDA Table
@@ -31,35 +29,78 @@ of new cases and number of new tests, any row with missing values in
 either column is removed from the date set. We also calculated the
 response ratio as defined below:
 
-Response Ratio = \# of daily new cases / \# of daily new tests
+Response Ratio = \# of daily new tests / \# of daily new cases
 
 Below we have shown the number of observations, mean, median and
-standard deviation of response ratio.
+standard deviation of response ratio (Table 1).
 
-We can see from the table that the mean response ratio are both higher
-than the median, therefore both distribution seem to be right skewed.
-Thus, we might choose to use median as the test statistic in our
-hypothesis analysis. The standard deviation does not have as large
-difference as the mean and median between Canada and USA, so it might be
-reasonable to assume equal variance in our analysis.
+We can see from the table that the mean response ratio for Canada is
+higher than the median, so its distribution seems to be right skewed.
+The mean and median ratio for the USA are close to each other, which
+suggests that the ratio for the USA is normally distributed.
+
+The standard deviation of Canada is quite large, compared with the mean
+and median ratio. It indicates that the response ratio in Canada is more
+widely spread out. The standard deviation of the USA is a lot smaller,
+which suggests that more of the ratio is clustered around the mean.
+
+``` r
+covid_all_country <-  read_csv("data/owid-covid-data.csv", guess_max = 5000)
+
+covid_CAN_USA <- covid_all_country %>% 
+    filter(iso_code=="CAN"| iso_code =="USA") %>% 
+    filter(date < "2020-11-01") %>% 
+    filter(new_cases != 0) %>% 
+    select("iso_code", "date", "location", "new_tests", "new_cases") %>% 
+    drop_na(new_tests, new_cases) %>% 
+    mutate(response_ratio = new_tests/new_cases) 
+
+covid_CAN_USA_summary <-  covid_CAN_USA %>% 
+    group_by(iso_code) %>% 
+    summarise(sample_size = n(),
+              mean_response_ratio = mean(response_ratio),
+              median_response_ratio = median(response_ratio),
+              standard_dev = sd(response_ratio),
+              )
+kable(covid_CAN_USA_summary, caption = "Table 1. Summary Statistics of Response Ratio")
+```
 
 | iso\_code | sample\_size | mean\_response\_ratio | median\_response\_ratio | standard\_dev |
 | :-------- | -----------: | --------------------: | ----------------------: | ------------: |
-| CAN       |          230 |             0.0316949 |               0.0193328 |     0.0323084 |
-| USA       |          245 |             0.0730009 |               0.0601935 |     0.0462542 |
+| CAN       |          227 |              71.22983 |                51.11975 |     64.476327 |
+| USA       |          245 |              17.82263 |                16.61308 |      8.480732 |
 
 Table 1. Summary Statistics of Response Ratio
 
 ## EDA Plot
 
 To visualize the distribution, we have plotted the distribution of each
-country’s response ratio in the histogram below. The histogram further
-confirms that the distributions of both response ratio are indeed right
-skewed.
+country’s response ratio in the histogram below.
 
-There appears to be a high concentration of the response ratio for
-Canada between 0.01 and 0.025. The distribution of USA shows a more flat
-distribution as the ratio tend to range from 0.025 to 0.075.
+The histogram further confirms that the distributions of Canada’s
+response ratio is indeed right skewed. In addition, we can see that both
+distributions seem to be unimodal but the centre of the distribution
+seem to be different. There appears to be a high concentration of the
+response ratio between 20 and 50 for Canada and between 10 and 20 for
+the USA.
+
+``` r
+dist_CAN <- covid_CAN_USA %>% 
+    filter(iso_code =="CAN") %>% 
+    ggplot(aes(response_ratio)) +
+    geom_histogram(bins=50) +
+    xlab("Response Ratio, Canada") +
+    ggtitle("Sample Distribution of Canada's Response Ratio")
+
+dist_USA <- covid_CAN_USA %>% 
+    filter(iso_code =="USA") %>% 
+    ggplot(aes(response_ratio)) +
+    geom_histogram(bins=50) +
+    xlab("Response Ratio, USA") +
+    ggtitle("Sample Distribution of USA's Response Ratio")
+
+plot_grid(dist_CAN, dist_USA, ncol=1)
+```
 
 ![](EDA_analysis_files/figure-gfm/EDA%20Plot-1.png)<!-- -->
 
