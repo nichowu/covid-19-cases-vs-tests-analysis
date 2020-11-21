@@ -1,0 +1,79 @@
+---
+title: "Exoloratory Data Analysis of the Covid-19 Data Set"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message=FALSE)
+library(tidyverse)
+library(feather)
+library(knitr)
+library(broom)
+library(datateachr)
+library(infer)
+library(readxl)
+library(cowplot)
+theme_set(theme_minimal())
+set.seed(2020)
+```
+
+## Summary of the data set
+
+The data set used in this project is a collection of the COVID-19 data maintained by [Our World in Data](https://ourworldindata.org/coronavirus). It is updated daily and includes data on confirmed cases, deaths, hospitalizations and testing, as well as other variable of potential interests. This data has been collected, aggregated, and documented by Cameron Appel, Diana Beltekian, Daniel Gavrilov, Charlie Giattino, Joe Hasell, Bobbie Macdonald, Edouard Mathieu, Esteban Ortiz-Ospina, Hannah Ritchie, Max Roser. It was sourced from various origin. Confirmed cases, deaths, hospitalizations and other related information are sourced from the European Centre for Disease Prevention and Control (ECDC). Testing related information are collected by the Our World in Data team from offical reports. Other sources include United Nations, World Bank, Global Burden of Disease. More information can be found [here](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
+
+## EDA Table
+
+Each row in the data set represents COVID-19 related information for a given country on a given day starting from 2019-12-31. To limit the scope of our project, we have chosen the data set that includes information up to 2020-11-18. Within this data set, there are 57,606 observations and 50 variables. We will be primarily looking at the COVID-19 data on Canada and USA. Since we are interested in both number of new cases and number of new tests, any row with missing values in either column is removed from the date set. We also calculated the response ratio as defined below:
+
+Response Ratio = \# of daily new cases / \# of daily new tests
+
+Below we have shown the number of observations, mean, median and standard deviation of response ratio.
+
+We can see from the table that the mean response ratio are both higher than the median, therefore both distribution seem to be right skewed. Thus, we might choose to use median as the test statistic in our hypothesis analysis. The standard deviation does not have as large difference as the mean and median between Canada and USA, so it might be reasonable to assume equal variance in our analysis.
+
+```{r EDA Table}
+covid_all_country <-  read_csv("data/owid-covid-data.csv", guess_max = 5000)
+
+covid_CAN_USA <- covid_all_country %>% 
+    filter(iso_code=="CAN"| iso_code =="USA") %>% 
+    filter(date < "2020-11-01") %>% 
+    select("iso_code", "date", "location", "new_tests", "new_cases") %>% 
+    drop_na(new_tests, new_cases) %>% 
+    mutate(response_ratio = new_cases/new_tests)
+
+covid_CAN_USA_summary <-  covid_CAN_USA %>% 
+    group_by(iso_code) %>% 
+    summarise(sample_size = n(),
+              mean_response_ratio = mean(response_ratio),
+              median_response_ratio = median(response_ratio),
+              standard_dev = sd(response_ratio),
+              )
+kable(covid_CAN_USA_summary, caption = "Table 1. Summary Statistics of Response Ratio")
+```
+
+## EDA Plot
+
+To visualize the distribution, we have plotted the distribution of each country's response ratio in the histogram below.
+
+The histogram further confirms that the distributions of both response ratio are indeed right skewed. In addition, we can see that both distributions seem to be unimodal but the centre of the distribution seem to be different. There appears to be a high concentration of the response ratio for Canada between 0.01 and 0.025. The distribution of USA shows a more flat distribution as the ratio tend to range from 0.025 to 0.075.
+
+```{r EDA Plot}
+
+dist_CAN <- covid_CAN_USA %>% 
+    filter(iso_code =="CAN") %>% 
+    ggplot(aes(response_ratio)) +
+    geom_histogram(bins=70) +
+    xlab("Response Ratio, Canada") +
+    ggtitle("Sample Distribution of Canada's Response Ratio")
+
+dist_USA <- covid_CAN_USA %>% 
+    filter(iso_code =="USA") %>% 
+    ggplot(aes(response_ratio)) +
+    geom_histogram(bins=70) +
+    xlab("Response Ratio, USA") +
+    ggtitle("Sample Distribution of USA's Response Ratio")
+
+plot_grid(dist_CAN, dist_USA, ncol=1)
+```
+
+Figure 1. Distribution of Response Ratio for Canada and USA
