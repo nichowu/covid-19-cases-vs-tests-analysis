@@ -8,13 +8,13 @@ maintained by [Our World in
 Data](https://ourworldindata.org/coronavirus). It is updated daily and
 includes data on confirmed cases, deaths, hospitalizations and testing,
 as well as other variable of potential interests. This data has been
-collected, aggregated, and documented by Cameron Appel et al. Various
-origins have been sourced. Confirmed cases, deaths, hospitalizations and
-other related information are sourced from the European Centre for
-Disease Prevention and Control (ECDC). Testing related information are
-collected by the Our World in Data team from offical reports. Other
-sources include United Nations, World Bank and Global Burden of Disease.
-More information can be found
+collected, aggregated, and documented by Cameron Appel et
+al. \[@owidcoronavirus\]. Various origins have been sourced. Confirmed
+cases, deaths, hospitalizations and other related information are
+sourced from the European Centre for Disease Prevention and Control
+(ECDC). Testing related information are collected by the Our World in
+Data team from offical reports. Other sources include United Nations,
+World Bank and Global Burden of Disease. More information can be found
 [here](https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv).
 
 ## EDA Table
