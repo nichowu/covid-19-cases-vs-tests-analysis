@@ -60,7 +60,7 @@ covid_all_country <-  read_csv("data/owid-covid-data.csv", guess_max = 5000)
 covid_CAN_USA <- covid_all_country %>% 
     filter(iso_code=="CAN"| iso_code =="USA") %>% 
     filter(date < "2020-11-01") %>% 
-    filter(new_cases != 0) %>% 
+    filter(new_cases != 0 & new_tests !=0) %>% 
     select("iso_code", "date", "location", "new_tests", "new_cases") %>% 
     drop_na(new_tests, new_cases) %>% 
     mutate(response_ratio = new_tests/new_cases) 
