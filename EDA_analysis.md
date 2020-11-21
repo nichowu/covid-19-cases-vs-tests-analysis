@@ -109,9 +109,50 @@ dist_USA <- covid_CAN_USA %>%
     xlab("Response Ratio, USA") +
     ggtitle("Sample Distribution of USA's Response Ratio")
 
-plot_grid(dist_CAN, dist_USA, ncol=1)
+plot_grid(dist_USA, dist_CAN, ncol=1)
 ```
 
 ![](EDA_analysis_files/figure-gfm/EDA%20Plot-1.png)<!-- -->
 
-Figure 1. Distribution of Response Ratio for Canada and USA
+Figure 1. Histogram for Distribution of Response Ratio of Canada and USA
+
+To better understand the entire distribution of the data, we also
+plotted the distribution and the mean ratio through violin plot.
+
+``` r
+covid_CAN_USA_plot <- covid_CAN_USA %>%
+  mutate(across(iso_code, fct_relabel, .fun = str_wrap, width = 30)) %>%
+  ggplot(aes(x = response_ratio, y = iso_code)) +
+  geom_violin(fill = "yellow", 
+              alpha = .1, adjust = .8, trim = FALSE) +
+  stat_summary(fun = mean,
+               colour = "red",
+               geom = "point") +
+  scale_x_continuous(labels = scales::label_number_si()) +
+  labs(title = "COVID-19 Response Ratio - Canada vs USA",
+       subtitle = "Means shown in red",
+       x = "Mean of Response Ratio in both countries",
+       y = "Country")
+covid_CAN_USA_plot
+```
+
+![](EDA_analysis_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+Figure 2. Violin Plot for Distribution of Response Ratio of Canada and
+USA
+
+This is a bit hard to see given the outliers. Let’s zoom into our plot
+to better highlight differences.
+
+``` r
+covid_CAN_USA_plot + 
+  scale_x_continuous(limits = c(0, 100))
+```
+
+![](EDA_analysis_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+Figure 3. Violin Plot for Distribution of Response Ratio of Canada and
+USA (Removed Outliers)
+
+We can see that the response ratio of USA are mostly clustered around
+the mean while the response ratio of Canada are more widely spread.
