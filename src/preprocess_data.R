@@ -1,4 +1,4 @@
-# author: Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tannmay Sharma
+# author: Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tanmay Sharma
 # date: 2020-11-25
 
 "Filters, cleans and transforms the OWID Covid-19 data (from (https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv)).
