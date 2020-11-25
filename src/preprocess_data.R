@@ -44,7 +44,7 @@ main <- function(input, out_dir) {
     )
   
   
-  # write scale factor to a file
+  # create a directory for processed data if it does not exist
   try({
     dir.create(out_dir)
   })
