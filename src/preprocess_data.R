@@ -51,7 +51,8 @@ main <- function(input, out_dir) {
   
   # write processed and summary data to csv files
   write_csv(covid_can_usa, paste0(out_dir, "/covid_can_usa.csv"))
-  write_csv(covid_can_usa_summary, paste0(out_dir, "/covid_can_usa_summary.csv"))
+  write_csv(covid_can_usa_summary,
+            paste0(out_dir, "/covid_can_usa_summary.csv"))
 }
 
 main(opt$input, opt$out_dir)
