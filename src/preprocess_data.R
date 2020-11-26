@@ -31,7 +31,7 @@ main <- function(input, out_dir) {
   
   print(covid_can_usa)
   
-  # create a summary table for Canada and USA that contains columns data summary statistic columns
+  # create a summary table for Canada and USA that contains summary statistic of our data
   covid_can_usa_summary <-  covid_can_usa %>%
     group_by(iso_code) %>%
     summarise(
