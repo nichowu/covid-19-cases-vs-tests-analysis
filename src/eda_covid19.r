@@ -31,26 +31,21 @@ main <- function(input_path, out_dir) {
                   median_response_ratio = median(response_ratio),
                   standard_dev = sd(response_ratio)
         )
-                         
-    #save table as a .png file
+    
+    #create a directory for processed data if it does not exist
+    try({
+      dir.create(out_dir)
+    })
+    
+    #save table as a .csv file
     write_csv(covid_CAN_USA_summary, 
               paste0(out_dir, "/covid_CAN_USA_summary.csv"))
 
 
     #create the histogram plot
-    dist_CAN <- covid_CAN_USA %>%
-        filter(iso_code =="CAN") %>%
-        ggplot(aes(response_ratio)) +
-        geom_histogram(bins=50) +
-        xlab("Response Ratio, Canada") +
-        ggtitle("Sample Distribution of Canada's Response Ratio")
+    dist_CAN <- create_distribution_plot(covid_CAN_USA, "CAN", "Canada")
 
-    dist_USA <- covid_CAN_USA %>%
-        filter(iso_code =="USA") %>%
-        ggplot(aes(response_ratio)) +
-        geom_histogram(bins=50) +
-        xlab("Response Ratio, USA") +
-        ggtitle("Sample Distribution of USA's Response Ratio")
+    dist_USA <- create_distribution_plot(covid_CAN_USA, "USA", "USA")
 
     histo_plot <- plot_grid(dist_USA, dist_CAN, ncol=1)
 
@@ -84,5 +79,14 @@ main <- function(input_path, out_dir) {
     
 }
 
+#define a function for creating distribution plot
+create_distribution_plot <- function(data, iso_code, country){
+  data %>% 
+    filter(iso_code == iso_code) %>%
+    ggplot(aes(response_ratio)) +
+    geom_histogram(bins=50) +
+    xlab(paste0("Response Ratio, ", country)) +
+    ggtitle(paste0("Sample Distribution of ", country, "'s Response Ratio"))
+}
 main(opt$input_path, opt$out_dir)
 
