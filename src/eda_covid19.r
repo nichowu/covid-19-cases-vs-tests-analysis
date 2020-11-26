@@ -1,7 +1,7 @@
 # author: Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tanmay Sharma
 # date: 2020-11-25
 
-"Creates eda tablea nd plots for the response ratio from the COVID-19 data (from https://github.com/owid/covid-19-data/tree/master/public/data).
+"Creates eda table and plots for the response ratio from the COVID-19 data (from https://github.com/owid/covid-19-data/tree/master/public/data).
 Saves the plots as a pdf and png file.
 Usage: src/eda_covid19.r --input_path=<input_path> --out_dir=<out_dir>
   
