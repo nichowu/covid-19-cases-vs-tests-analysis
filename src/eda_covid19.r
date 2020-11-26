@@ -22,9 +22,9 @@ opt <- docopt(doc)
 main <- function(input_path, out_dir) {
   
     #create a table summarizing the key statistics
-    covid_CAN_USA <- read_csv(input_path)
+    covid_can_usa <- read_csv(input_path)
     
-    covid_CAN_USA_summary <-  covid_CAN_USA %>%
+    covid_can_usa_summary <-  covid_can_usa %>%
         group_by(iso_code) %>%
         summarise(sample_size = n(),
                   mean_response_ratio = mean(response_ratio),
@@ -37,17 +37,17 @@ main <- function(input_path, out_dir) {
       dir.create(out_dir)
     })
     
-    #save table as a .csv file
-    write_csv(covid_CAN_USA_summary, 
-              paste0(out_dir, "/covid_CAN_USA_summary.csv"))
+    #save summary table as a .csv file
+    write_csv(covid_can_usa_summary, 
+              paste0(out_dir, "/covid_can_usa_summary.csv"))
 
 
     #create the histogram plot
-    dist_CAN <- create_distribution_plot(covid_CAN_USA, "CAN", "Canada")
+    dist_can <- create_distribution_plot(covid_can_usa, "CAN", "Canada")
 
-    dist_USA <- create_distribution_plot(covid_CAN_USA, "USA", "USA")
+    dist_usa <- create_distribution_plot(covid_can_usa, "USA", "USA")
 
-    histo_plot <- plot_grid(dist_USA, dist_CAN, ncol=1)
+    histo_plot <- plot_grid(dist_usa, dist_can, ncol=1)
 
     #save histogram as a .png file
     ggsave(paste0(out_dir, "/histogram_plot.png"),
@@ -56,7 +56,7 @@ main <- function(input_path, out_dir) {
            height = 10)
     
     #create a violin plot with mean point
-    violin_plot <- covid_CAN_USA %>%
+    violin_plot <- covid_can_usa %>%
         mutate(across(iso_code, fct_relabel, .fun = str_wrap, width = 30)) %>%
         ggplot(aes(x = response_ratio, y = iso_code)) +
         geom_violin(fill = "yellow",
@@ -80,13 +80,14 @@ main <- function(input_path, out_dir) {
 }
 
 #define a function for creating distribution plot
-create_distribution_plot <- function(data, iso_code, country){
+create_distribution_plot <- function(data, code, country){
   data %>% 
-    filter(iso_code == iso_code) %>%
+    filter(iso_code == code) %>%
     ggplot(aes(response_ratio)) +
     geom_histogram(bins=50) +
     xlab(paste0("Response Ratio, ", country)) +
     ggtitle(paste0("Sample Distribution of ", country, "'s Response Ratio"))
 }
+
 main(opt$input_path, opt$out_dir)
 
