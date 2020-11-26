@@ -27,7 +27,7 @@ main <- function(input, out_dir) {
     filter(iso_code == "CAN" | iso_code == "USA",
            date < "2020-11-01",
            new_cases != 0 & new_tests != 0) %>%
-    select("iso_code", "date", "location", "new_tests", "new_cases") %>%
+    select("iso_code", "date", "new_tests", "new_cases") %>%
     drop_na(new_tests, new_cases) %>%
     mutate(response_ratio = new_tests / new_cases)
   
