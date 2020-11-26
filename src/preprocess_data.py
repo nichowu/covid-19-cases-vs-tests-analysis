@@ -18,9 +18,9 @@ opt = docopt(__doc__)
 
 # create constants with relevant info we need from the raw csv data
 ISO_CODES = {'CANADA': 'CAN', 'USA': 'USA'}
+COL_NAMES = ["iso_code", "date", "new_cases", "new_tests"]
 START_DATE = '2020-03-01'
 END_DATE = '2020-10-31'
-COL_NAMES = ["iso_code", "date", "new_cases", "new_tests"]
 
 
 def main(input_file, out_dir):
