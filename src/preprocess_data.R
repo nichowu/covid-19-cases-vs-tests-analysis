@@ -19,9 +19,7 @@ opt <- docopt(doc)
 main <- function(input, out_dir) {
   raw_data <- read_csv(input, guess_max = 5000)
   
-  print(raw_data)
-  
-  # filter data set to consider only Canada and USA, and select only variables of interest
+  # filter dataset to consider only Canada and USA, and select only variables of interest
   # then create a new column called response_ratio which holds the ratio between new_tests and new_cases
   covid_can_usa <- raw_data %>%
     filter(iso_code == "CAN" | iso_code == "USA",
@@ -42,7 +40,6 @@ main <- function(input, out_dir) {
       median_response_ratio = median(response_ratio),
       std = sd(response_ratio),
     )
-  
   
   # create a directory for processed data if it does not exist
   try({
