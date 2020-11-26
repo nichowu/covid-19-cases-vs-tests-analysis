@@ -2,7 +2,7 @@
 # date: 2020-11-25
 
 "Filters, cleans and transforms the OWID Covid-19 data (from (https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv)).
-Writes the transformed and summarized data to separate csv files.
+Writes the transformed data to separate csv files.
 Usage: src/preprocess_data.R --input=<input> --out_dir=<out_dir>
 
 Options:
@@ -29,27 +29,13 @@ main <- function(input, out_dir) {
     drop_na(new_tests, new_cases) %>%
     mutate(response_ratio = new_tests / new_cases)
   
-  print(covid_can_usa)
-  
-  # create a summary table for Canada and USA that contains summary statistic of our data
-  covid_can_usa_summary <-  covid_can_usa %>%
-    group_by(iso_code) %>%
-    summarise(
-      sample_size = n(),
-      mean_response_ratio = mean(response_ratio),
-      median_response_ratio = median(response_ratio),
-      std = sd(response_ratio),
-    )
-  
   # create a directory for processed data if it does not exist
   try({
     dir.create(out_dir)
   })
   
-  # write processed and summary data to csv files
+  # write processed data to csv files
   write_csv(covid_can_usa, paste0(out_dir, "/covid_can_usa.csv"))
-  write_csv(covid_can_usa_summary,
-            paste0(out_dir, "/covid_can_usa_summary.csv"))
 }
 
 main(opt$input, opt$out_dir)
