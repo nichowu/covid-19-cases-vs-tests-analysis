@@ -86,7 +86,18 @@ main <- function(input_path, out_dir) {
 }
 
 #define a function for creating distribution plot
+
+
 create_distribution_plot <- function(data, code, country){
+  #' Create histogram plot via ggplot
+  #'
+  #' @param data the data containing the distribution 
+  #' @param code iso_code
+  #' @param country country name
+  #'
+  #' @return ggplot histogram 
+  #'
+  #' @examples dist_usa <- create_distribution_plot(covid_can_usa, "USA", "USA")
   data %>% 
     filter(iso_code == code) %>%
     ggplot(aes(response_ratio)) +
