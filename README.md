@@ -117,3 +117,13 @@ please provide attribution and link to this repository.
 
 # References
 
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-owidcoronavirus">
+
+Max Roser, Esteban Ortiz-Ospina, Hannah Ritchie, and Joe Hasell. 2020.
+“Coronavirus Pandemic (Covid-19).” *Our World in Data*.
+
+</div>
+
+</div>
