@@ -35,7 +35,7 @@ main <- function(data, sum_data, out_dir) {
   p_val_save(ratio_bootstraps, test_stat, out_dir)
 }
 
-#' Performs a Bartlette Test to test for equal variances
+#' Performs a Bartlett Test to test for equal variances
 #' and saves the output in the desired folder
 #'    
 #' @param data data frame to perform Bartlett test on
@@ -83,14 +83,19 @@ ratio_bootstraps <- function(data) {
 null_dist_save <- function(ratio_bootstraps, ci_threshold, test_stat, out_dir) {
     visualize(ratio_bootstraps) + 
     geom_vline(xintercept = c(ci_threshold[1], ci_threshold[2]),
-               color = 'black',
-               lty = 4) + 
+               color = 'blue',
+               lty = 3) + 
     geom_vline(xintercept = test_stat, color = 'red') + 
-    xlab('Difference in Medians') + 
+    xlab('Simulated Difference in Sample Median Daily Response Ratios') + 
     ylab('Count') + 
-    ggtitle('Figure 1. Difference in Median Response Rate Simulation') + 
-    theme(plot.title = element_text(size = 9))
-    ggsave(filename = (paste0(out_dir,'/median_simulation.png')), width = 5, height = 3)
+    ggtitle('Distribution for the Null Hypothesis') + 
+    theme(plot.title = element_text(size = 9),
+          axis.title = element_text(size = 7)
+    ) +
+    
+    annotate("text", x = -31, y = 150, label = "Test Statistic", color = 'red', size = 2)
+    
+    ggsave(filename = (paste0(out_dir,'/median_simulation.png')), width = 4, height = 2.5)
 }
 
 #' Calculates p-value of the simulated hypothesis test
@@ -109,7 +114,7 @@ p_val_save <- function(ratio_bootstraps, test_stat, out_dir){
       select(p_val)
   }
 
-  kable(pval_table, caption = "Table 3. P-value of Simulated Hypothesis Test", 'html', table.attr = "style='width:10%;'") %>%
+  kable(pval_table, caption = "P-value of Simulated Hypothesis Test", 'html', table.attr = "style='width:10%;'") %>%
   kable_material(c('striped', 'hover')) %>%
   kable_styling("striped") %>%
   save_kable(paste0(out_dir, "/simulation_pval.png"))
