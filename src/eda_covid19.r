@@ -61,8 +61,8 @@ main <- function(input_path, out_dir) {
     #save histogram as a .png file
     ggsave(paste0(out_dir, "/histogram_plot.png"),
            histo_plot,
-           width = 8,
-           height = 10)
+           width = 5,
+           height = 3)
     
     #create a violin plot with mean point
     violin_plot <- covid_can_usa %>%
@@ -106,7 +106,9 @@ create_distribution_plot <- function(data, code, country){
     ggplot(aes(response_ratio)) +
     geom_histogram(bins=50) +
     xlab(paste0("Response Ratio, ", country)) +
-    ggtitle(paste0("Sample Distribution of ", country, "'s Response Ratio"))
+    ggtitle(paste0("Sample Distribution of ", country, "'s Response Ratio"))+
+    theme(plot.title = element_text(size = 9)) +
+    theme(axis.title = element_text(size = 9))
 }
 
 main(opt$input_path, opt$out_dir)
