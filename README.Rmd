@@ -9,8 +9,7 @@ bibliography: doc/covid19.bib
 # About
 
 The data set used in this project comes from the Our World in Data
-COVID-19 Database created by Hannah Richie et al. (Max Roser and Hasell
-2020). This data set examines the impact of COVID-19 on countries all
+COVID-19 Database created by Hannah Richie et al. [@owidcoronavirus]. This data set examines the impact of COVID-19 on countries all
 over the world, where daily statistics pertaining to the pandemic from
 over 200 countries have been recorded each day since December 31st 2019.
 Each row in the data set represents a date in a country, where
