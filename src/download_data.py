@@ -14,7 +14,7 @@ opt = docopt(__doc__)
 
 
 def main(url, path):
-    data = pd.read_csv(url, header=None)
+    data = pd.read_csv(url, low_memory=False)
     try:
         data.to_csv(path, index=False)
     except:
