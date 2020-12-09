@@ -122,8 +122,9 @@ create_distribution_plot <- function(data, code, country) {
   data %>%
     filter(iso_code == code) %>%
     ggplot(aes(response_ratio)) +
-    geom_histogram(bins = 50) +
+    geom_histogram(bins = 80) +
     xlab(paste0("Response Ratio, ", country)) +
+    xlim(0, 200) +
     ggtitle(paste0("Sample Distribution of ", country, "'s Response Ratio")) +
     theme(plot.title = element_text(size = 9)) +
     theme(axis.title = element_text(size = 9))
