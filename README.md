@@ -51,13 +51,13 @@ To replicate the analysis, install
 repository and run the following command at the command line/terminal
 from the root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.8.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis all
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.3.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis all
 
 To reset the repo to a clean state, with no intermediate or results
 files, run the following command at the command line/terminal from the
 root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.8.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis clean
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.3.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis clean
 
 ### 2\. Without using Docker
 
