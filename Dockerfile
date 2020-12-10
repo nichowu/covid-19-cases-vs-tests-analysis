@@ -13,6 +13,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     knitr \
     ggthemes
 
+
+# install the rest of R packages using install.packages
 RUN Rscript -e "install.packages('broom')" \
  "install.packages('kableExtra')" \
  "install.packages('magick')" \
