@@ -5,7 +5,7 @@ Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tanmay Sharma
 # About
 
 The data set used in this project comes from the Our World in Data
-COVID-19 Database created by Hannah Richie et al. (Max Roser and Hasell
+COVID-19 Database created by Max Roser et al. (Max Roser and Hasell
 2020). This data set examines the impact of COVID-19 on countries all
 over the world, where daily statistics pertaining to the pandemic from
 over 200 countries have been recorded each day since December 31st 2019.
@@ -39,6 +39,28 @@ The final report can be found
 
 # Usage
 
+There are two suggested ways to run this analysis:
+
+### 1\. Using Docker
+
+*note - the instructions in this section also depends on running this in
+a unix shell (e.g., terminal or Git Bash)*
+
+To replicate the analysis, install
+[Docker](https://www.docker.com/get-started). Then clone this GitHub
+repository and run the following command at the command line/terminal
+from the root directory of this project:
+
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.3.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis all
+
+To reset the repo to a clean state, with no intermediate or results
+files, run the following command at the command line/terminal from the
+root directory of this project:
+
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.3.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis clean
+
+### 2\. Without using Docker
+
 To replicate the analysis, clone this GitHub repository, install the
 [dependencies](#dependencies) listed below, and run the following
 commands at the command line/terminal from the root directory of this
@@ -52,17 +74,24 @@ root directory of this project:
 
     make clean
 
+#### Dependency Diagram of the Makefile
+
+![](Makefile.png)
+
 # Dependencies
 
   - Python 3.8.5 and Python packages:
+    
       - docopt==0.6.2
       - pandas==1.1.4
       - numpy
       - altair
       - altair\_saver
       - selenium
-      - webdriver\_manager.chrome
+      - chromedriver\_binary
+
   - R version 3.6.1 and R packages:
+    
       - knitr==1.29
       - readr==1.3.1
       - tidyverse==1.3.0
@@ -75,6 +104,7 @@ root directory of this project:
       - webshot
       - magick
       - ggthemes
+
   - GNU make 4.2.1
 
 # License
@@ -87,7 +117,7 @@ please provide attribution and link to this repository.
 
 # References
 
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 
 <div id="ref-owidcoronavirus">
 
