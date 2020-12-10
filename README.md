@@ -5,15 +5,15 @@ Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tanmay Sharma
 # About
 
 The data set used in this project comes from the Our World in Data
-COVID-19 Database created by Hannah Richie et al. \[@owidcoronavirus\].
-This data set examines the impact of COVID-19 on countries all over the
-world, where daily statistics pertaining to the pandemic from over 200
-countries have been recorded each day since December 31st 2019. Each row
-in the data set represents a date in a country, where measurements like
-total cases, new daily cases, hospital admission rates etc. are
-recorded. Data has been collected in conjunction with the World Health
-Organization (WHO), the European Center for Disease Prevention and
-Control (ECDC) and is available on [Our World in
+COVID-19 Database created by Max Roser et al. (Max Roser and Hasell
+2020). This data set examines the impact of COVID-19 on countries all
+over the world, where daily statistics pertaining to the pandemic from
+over 200 countries have been recorded each day since December 31st 2019.
+Each row in the data set represents a date in a country, where
+measurements like total cases, new daily cases, hospital admission rates
+etc. are recorded. Data has been collected in conjunction with the World
+Health Organization (WHO), the European Center for Disease Prevention
+and Control (ECDC) and is available on [Our World in
 Data](https://ourworldindata.org/coronavirus) and raw data can be found
 [here](https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv).
 
@@ -116,3 +116,14 @@ re-use/re-mix the analysis and the materials used in this project,
 please provide attribution and link to this repository.
 
 # References
+
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-owidcoronavirus">
+
+Max Roser, Esteban Ortiz-Ospina, Hannah Ritchie, and Joe Hasell. 2020.
+“Coronavirus Pandemic (Covid-19).” *Our World in Data*.
+
+</div>
+
+</div>
