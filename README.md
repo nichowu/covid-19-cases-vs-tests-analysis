@@ -51,13 +51,13 @@ To replicate the analysis, install
 repository and run the following command at the command line/terminal
 from the root directory of this project:
 
-    docker run --rm -v /$(pwd):<waiting for code>
+    docker run --rm -v /$(pwd):/home/rstudio/covid_18_cases-vs_tests_analysis ttimbers/bc_predictor:v4.0 make -C /home/rstudio/covid_18_cases-vs_tests_analysis all
 
 To reset the repo to a clean state, with no intermediate or results
 files, run the following command at the command line/terminal from the
 root directory of this project:
 
-    docker run --rm -v /$(pwd):<waiting for code>
+    docker run --rm -v /$(pwd):/home/rstudio/covid_18_cases-vs_tests_analysis ttimbers/bc_predictor:v4.0 make -C /home/rstudio/covid_18_cases-vs_tests_analysis clean
 
 ### 2\. Without using Docker
 
@@ -74,6 +74,10 @@ root directory of this project:
 
     make clean
 
+#### Dependency Diagram of the Makefile
+
+![](Makefile.png)
+
 # Dependencies
 
   - Python 3.8.5 and Python packages:
@@ -83,7 +87,7 @@ root directory of this project:
       - altair
       - altair\_saver
       - selenium
-      - webdriver\_manager.chrome
+      - chromedriver\_binary
   - R version 3.6.1 and R packages:
       - knitr==1.29
       - readr==1.3.1
