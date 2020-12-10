@@ -13,7 +13,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     knitr \
     ggthemes
 
-RUN apt-get install libmagick++-dev -y
+RUN apt-get install libmagick++-dev -y && apt-get -y install ghostscript
 
 # install the rest of R packages using install.packages
 RUN Rscript -e "install.packages('broom')"
