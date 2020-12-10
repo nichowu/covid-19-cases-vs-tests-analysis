@@ -1,0 +1,35 @@
+digraph G {
+n2[label="all", color="red"];
+n8[label="data/processed/covid_can_usa.csv", color="green"];
+n10[label="data/raw/owid-covid-data.csv", color="green"];
+n4[label="doc/covid-response.Rmd", color="green"];
+n3[label="doc/covid-response.pdf", color="red"];
+n5[label="doc/covid19.bib", color="green"];
+n12[label="results/covid_can_usa_summary.csv", color="red"];
+n15[label="results/histogram_plot.png", color="green"];
+n6[label="results/median_simulation.png", color="red"];
+n14[label="results/simulation_pval.png", color="red"];
+n11[label="src/download_data.R", color="green"];
+n13[label="src/eda_covid19.r", color="green"];
+n9[label="src/preprocess_data.R", color="green"];
+n7[label="src/stat_analysis.R", color="green"];
+n3 -> n2 ; 
+n10 -> n8 ; 
+n9 -> n8 ; 
+n11 -> n10 ; 
+n4 -> n3 ; 
+n5 -> n3 ; 
+n15 -> n3 ; 
+n6 -> n3 ; 
+n14 -> n3 ; 
+n8 -> n12 ; 
+n13 -> n12 ; 
+n8 -> n15 ; 
+n13 -> n15 ; 
+n8 -> n6 ; 
+n12 -> n6 ; 
+n7 -> n6 ; 
+n8 -> n14 ; 
+n12 -> n14 ; 
+n7 -> n14 ; 
+}
