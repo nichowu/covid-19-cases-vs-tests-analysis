@@ -5,15 +5,15 @@ Fatime Selimi, Neel Phaterpekar, Nicholas Wu, Tanmay Sharma
 # About
 
 The data set used in this project comes from the Our World in Data
-COVID-19 Database created by Hannah Richie et al. (Max Roser and Hasell
-2020). This data set examines the impact of COVID-19 on countries all
-over the world, where daily statistics pertaining to the pandemic from
-over 200 countries have been recorded each day since December 31st 2019.
-Each row in the data set represents a date in a country, where
-measurements like total cases, new daily cases, hospital admission rates
-etc. are recorded. Data has been collected in conjunction with the World
-Health Organization (WHO), the European Center for Disease Prevention
-and Control (ECDC) and is available on [Our World in
+COVID-19 Database created by Hannah Richie et al. \[@owidcoronavirus\].
+This data set examines the impact of COVID-19 on countries all over the
+world, where daily statistics pertaining to the pandemic from over 200
+countries have been recorded each day since December 31st 2019. Each row
+in the data set represents a date in a country, where measurements like
+total cases, new daily cases, hospital admission rates etc. are
+recorded. Data has been collected in conjunction with the World Health
+Organization (WHO), the European Center for Disease Prevention and
+Control (ECDC) and is available on [Our World in
 Data](https://ourworldindata.org/coronavirus) and raw data can be found
 [here](https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv).
 
@@ -51,13 +51,13 @@ To replicate the analysis, install
 repository and run the following command at the command line/terminal
 from the root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/rstudio/covid_18_cases-vs_tests_analysis ttimbers/bc_predictor:v4.0 make -C /home/rstudio/covid_18_cases-vs_tests_analysis all
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.8.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis all
 
 To reset the repo to a clean state, with no intermediate or results
 files, run the following command at the command line/terminal from the
 root directory of this project:
 
-    docker run --rm -v /$(pwd):/home/rstudio/covid_18_cases-vs_tests_analysis ttimbers/bc_predictor:v4.0 make -C /home/rstudio/covid_18_cases-vs_tests_analysis clean
+    docker run --rm -v /$(pwd):/home/rstudio/covid-19-cases-vs-tests-analysis fatse/covid19-cases-vs-tests:v0.8.0 make -C /home/rstudio/covid-19-cases-vs-tests-analysis clean
 
 ### 2\. Without using Docker
 
@@ -81,6 +81,7 @@ root directory of this project:
 # Dependencies
 
   - Python 3.8.5 and Python packages:
+    
       - docopt==0.6.2
       - pandas==1.1.4
       - numpy
@@ -88,7 +89,9 @@ root directory of this project:
       - altair\_saver
       - selenium
       - chromedriver\_binary
+
   - R version 3.6.1 and R packages:
+    
       - knitr==1.29
       - readr==1.3.1
       - tidyverse==1.3.0
@@ -101,6 +104,7 @@ root directory of this project:
       - webshot
       - magick
       - ggthemes
+
   - GNU make 4.2.1
 
 # License
@@ -112,14 +116,3 @@ re-use/re-mix the analysis and the materials used in this project,
 please provide attribution and link to this repository.
 
 # References
-
-<div id="refs" class="references hanging-indent">
-
-<div id="ref-owidcoronavirus">
-
-Max Roser, Esteban Ortiz-Ospina, Hannah Ritchie, and Joe Hasell. 2020.
-“Coronavirus Pandemic (Covid-19).” *Our World in Data*.
-
-</div>
-
-</div>
