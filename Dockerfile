@@ -22,4 +22,5 @@ RUN Rscript -e  "install.packages('magick')"
 RUN Rscript -e  "install.packages('cowplot')"
 RUN Rscript -e  "install.packages('docopt')"
 RUN Rscript -e  "install.packages('infer')"
+RUN Rscript -e "install.packages('tinytex')"
 
